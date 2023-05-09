@@ -2,8 +2,24 @@ const Flight = require('../models/flight');
 
 function newFlight(req, res) {
   console.log('the new route has been hit');
-  res.render('flights/new');
+  const departure = getDeparture()
+  res.render('flights/new', {departure});
 }
+
+function getDeparture(){
+    const departingFlight = new Flight();
+    const date = departingFlight.departs;
+    const departure = date.toISOString().slice(0,16);
+    return departure
+}
+
+// function newFlight(req, res) {
+//     const newFlight = new Flight();
+//     const dt = newFlight.departs;
+//     let departsDate = `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}`;
+//     departsDate += `-${dt.getDate().toString().padStart(2, '0')}T${dt.toTimeString().slice(0, 5)}`;
+//     res.render('flights/new', { departsDate });
+//   }
 
 function create(req, res) {
   console.log('this is the req.body in create\n', req.body);
@@ -65,6 +81,10 @@ module.exports = {
   show,
 };
 
+
+
+///////////////// ALL of the code below was re-worked BECAUSE:
+// of the placement of the Flight.create() call outside the create controller function below.
 
 
 // ///////////////////////////////

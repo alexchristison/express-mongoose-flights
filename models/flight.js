@@ -11,13 +11,18 @@ const Schema = mongoose.Schema
 const flightSchema = new Schema({
     airline: String,
     airport: String,
-    flightNo: Number,
-    departs: Date,
-        // default: () => {
-        //     const oneYearFromNow = newDate();
-        //     oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() +1);
-        //     return oneYearFromNow;
-        // }
+    flightNo: {
+        type: Number,
+        min: 10,
+        max: 9999,
+    },
+    departs: {
+        type: Date,
+        default: () => {
+            const oneYearFromNow = new Date();
+            return oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() +1);;
+        }
+    }
 }, {
     timestamps: true
 });
