@@ -5,6 +5,13 @@ const mongoose = require('mongoose')
 // optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema
 
+// SUBDOCUMENTS are not models
+// subdocs can use document methods, NOT model medthods
+const destinationSchema = new Schema({
+    airport: String,
+    arrival: Date
+})
+
 // now we'll create our schema
 // this schema will serve as teh blueprint for our model 
 // we define the properties (aka paths) and assign data types to those properties

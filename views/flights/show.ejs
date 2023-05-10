@@ -6,8 +6,34 @@
     <h3>Flight Number: <%= flight.flightNo %></h3>
     <h3>Departs: <%= flight.departs %></h3>
 </section>
+<% if (flight.destinations && flight.destinations.length) { %>
+    <section>
+      <h2>Destinations</h2>
+      <% flight.destinations.forEach(function(destination) { %>
+        <div>
+          <p>Airport: <%= destination.airport %></p>
+          <p>Arrival: <%= destination.arrival %></p>
+        </div>
+      <% }) %>
+    </section>
+  <% } else { %>
+    <p>No destinations found for this flight.</p>
+  <% } %>
+  <form method="POST" action="/flights/<%= flight._id %>/destinations">
+    <div>
+      <label for="airport">Airport:</label>
+      <input type="text" name="airport" required>
+    </div>
+    <div>
+      <label for="arrival">Arrival:</label>
+      <input type="datetime-local" name="arrival" required>
+    </div>
+    <div>
+      <button type="submit">Add Destination</button>
+    </div>
+  </form>
 
-
+  
 <%- include('../partials/footer') %>
 
 
