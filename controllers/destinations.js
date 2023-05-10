@@ -1,14 +1,16 @@
 const Flight = require('../models/flight');
 
 function create(req, res) {
+    console.log('\n------------ Debugging Controller: createDest() ---------------\n')
+    console.log("here is the request:", req.body)
     // we need to find the flight
     Flight.findById(req.params.flightId)
         .then(flightDoc => {
             // then push the review into that flight's destnations array
             flightDoc.destinations.push(req.body)
-            // save the movie
+            // save the flight
             return flightDoc.save()
-        })
+        }) 
         .then(flightDoc => {
             // redirect to the flight show page
             res.redirect(`/flights/${flightDoc._id}`)
