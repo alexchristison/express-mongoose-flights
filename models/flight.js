@@ -8,7 +8,10 @@ const Schema = mongoose.Schema
 // SUBDOCUMENTS are not models
 // subdocs can use document methods, NOT model medthods
 const destinationSchema = new Schema({
-    airport: String,
+    airport: {
+        type: String,
+        enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'],
+    },
     arrival: Date
 })
 
@@ -29,7 +32,8 @@ const flightSchema = new Schema({
             const oneYearFromNow = new Date();
             return oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() +1);;
         }
-    }
+    },
+    destinations: [destinationSchema]
 }, {
     timestamps: true
 });

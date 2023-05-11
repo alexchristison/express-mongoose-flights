@@ -5,7 +5,6 @@
     <h3>Airport: <%= flight.airport %></h3>
     <h3>Flight Number: <%= flight.flightNo %></h3>
     <h3>Departs: <%= flight.departs %></h3>
-<!-- </section> -->
 <% if (flight.destinations && flight.destinations.length) { %>
     <section>
       <h2>Destinations</h2>
@@ -19,11 +18,9 @@
   <% } else { %>
     <p>No destinations found for this flight.</p>
   <% } %>
-  <!-- <form method="POST" action="/<%= flight._id %>/destinations"></form> -->
-    <form method="POST" action="/destinations/<%= flight._id %>/destinations"></form>
+  <form method="POST" action="/flights/<%= flight._id %>/destinations">
     <div>
-      <label for="airport">Airport:</label>
-      <!-- <input type="text" name="airport" required> -->
+      <label>Airport:</label>
       <select name="airport">
         <option value="AUS">AUS</option>
         <option value="DFW">DFW</option>
@@ -33,8 +30,8 @@
   </select><br>
     </div>
     <div>
-      <label for="destination">Arrival:</label>
-      <input type="datetime-local" name="destination" required>
+      <label>Arrival:</label>
+      <input type="datetime-local" name="arrival" required>
     </div>
     <div>
       <button type="submit">Add Destination</button>
@@ -44,9 +41,3 @@
 
   
 <%- include('../partials/footer') %>
-
-
-<!-- airline: String,
-    airport: String,
-    flightNo: Number,
-    departs: Date, -->
